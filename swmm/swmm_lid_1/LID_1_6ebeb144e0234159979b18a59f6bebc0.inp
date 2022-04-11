@@ -1,0 +1,401 @@
+[TITLE]
+;;Project Title/Notes
+A Low Impact Development model.
+See LID_Model.txt for more details.
+
+[OPTIONS]
+;;Option             Value
+FLOW_UNITS           CMS
+INFILTRATION         GREEN_AMPT
+FLOW_ROUTING         KINWAVE
+LINK_OFFSETS         DEPTH
+MIN_SLOPE            0
+ALLOW_PONDING        NO
+SKIP_STEADY_STATE    NO
+
+START_DATE           01/01/2007
+START_TIME           00:00:00
+REPORT_START_DATE    01/01/2007
+REPORT_START_TIME    00:00:00
+END_DATE             01/01/2007
+END_TIME             12:00:00
+SWEEP_START          01/01
+SWEEP_END            12/31
+DRY_DAYS             0
+REPORT_STEP          00:01:00
+WET_STEP             00:01:00
+DRY_STEP             01:00:00
+ROUTING_STEP         0:01:00 
+RULE_STEP            00:00:00
+
+INERTIAL_DAMPING     PARTIAL
+NORMAL_FLOW_LIMITED  SLOPE
+FORCE_MAIN_EQUATION  H-W
+VARIABLE_STEP        0.75
+LENGTHENING_STEP     0
+MIN_SURFAREA         0
+MAX_TRIALS           0
+HEAD_TOLERANCE       0
+SYS_FLOW_TOL         5
+LAT_FLOW_TOL         5
+MINIMUM_STEP         0.5
+THREADS              1
+
+[EVAPORATION]
+;;Data Source    Parameters
+;;-------------- ----------------
+CONSTANT         5.1
+DRY_ONLY         NO
+
+[RAINGAGES]
+;;         RainType    TimeIntrvl SnowCatch DataSource   DataSourceName
+RainGage   INTENSITY   0:05       1.0       TIMESERIES   2-yr        
+
+[SUBCATCHMENTS]
+;;       Raingage   Outlet   Area      PercImperv Width    PercSlope CurbLength SnowPack
+S1       RainGage   Swale4   2.1013    41.684     483.72   2.0       0.0              
+S2       RainGage   J1       2.189     46.233     503.83   2.0       0.0              
+S3       RainGage   Swale3   1.7087    28.988     443.79   3.1       0.0              
+S4       RainGage   Swale4   3.1497    36.62      710.49   3.1       0.0              
+S5       RainGage   J1       3.048     64.36      509.02   2.0       0.0              
+S6       RainGage   Swale6   1.1915    0.0        276.45   3.1       0.0              
+Swale3   RainGage   Swale4   0.15241   0.0        15.24    0.5       0.0              
+Swale4   RainGage   Swale6   0.23091   0.0        15.24    0.5       0.0              
+Swale6   RainGage   J1       0.18935   0.0        15.24    0.5       0.0              
+
+[SUBAREAS]
+;;       N-Imperv N-Perv S-Imperv S-Perv PctZero RouteTo  PctRouted
+																							 
+S1       0.015    0.24   1.524    7.62   25      OUTLET          
+S2       0.015    0.24   1.524    7.62   25      OUTLET          
+S3       0.015    0.24   1.524    7.62   25      OUTLET          
+S4       0.015    0.24   1.524    7.62   25      OUTLET          
+S5       0.015    0.24   1.524    7.62   25      OUTLET          
+S6       0.015    0.24   1.524    7.62   25      OUTLET          
+Swale3   0.01     0.2    1.27     1.27   25      OUTLET          
+Swale4   0.01     0.2    1.27     1.27   25      OUTLET          
+Swale6   0.01     0.2    1.27     1.27   25      OUTLET          
+
+[INFILTRATION]
+;;       Param1 Param2 Param3 Param4 Param5
+																	   
+S1       88.9   5.08   0.2    7      0.0 
+S2       88.9   5.08   0.2    7      0.0 
+S3       88.9   5.08   0.2    7      0.0 
+S4       88.9   5.08   0.2    7      0.0 
+S5       88.9   5.08   0.2    7      0.0 
+S6       88.9   5.08   0.2    7      0.0 
+Swale3   88.9   5.08   0.2    7      0.0 
+Swale4   88.9   5.08   0.2    7      0.0 
+Swale6   88.9   5.08   0.2    7      0.0 
+
+[LID_CONTROLS]
+;;Name           Type/Layer Parameters
+;;-------------- ---------- ----------
+GreenRoof        BC
+GreenRoof        SURFACE    0.0        0.0        0.1        1.0        5         
+GreenRoof        SOIL       75         0.5        0.2        0.1        12.5       10.0       89        
+GreenRoof        STORAGE    25.4       0.75       0          0          NO        
+GreenRoof        DRAIN      1          0.5        0          6          0          0                    
+
+PorousPave   PP
+PorousPave   SURFACE    0.0        0.0        0.02       2          5         
+PorousPave   PAVEMENT   6          0.15       0          100        0          0          0         
+PorousPave   STORAGE    305        0.75       0.2        0          NO        
+PorousPave   DRAIN      0          0.5        0          6          0          0                    
+
+Raingarden       BC
+Raingarden       SURFACE    152.4      0.0        0.0        0.0        5         
+Raingarden       SOIL       305        0.5        0.2        0.1        12.5       10.0       89        
+Raingarden       STORAGE    305        0.5        0.2        0          NO        
+Raingarden       DRAIN      0          1          12.2       6          0          0                    
+
+InfilTrench      IT
+InfilTrench      SURFACE    0.0        0.0        0.24       0.4        5         
+InfilTrench      STORAGE    914        0.40       0.2        0          NO        
+InfilTrench      DRAIN      0          0.5        0          6          0          0                    
+
+RainBarrels      RB
+RainBarrels      STORAGE    1220       1          0          0          NO        
+RainBarrels      DRAIN      1          0.5        0          6          0          0                    
+
+Swale            VS
+Swale            SURFACE    914.4      0.0        0.24       1.0        5         
+
+[LID_USAGE]
+;;       LID_Process   Number Area      Width    InitSat FromImp ToPerv RptFile DrainTo FromPerv
+																																					 
+S1       InfilTrench   4      49.424    40.538   0       40      0      *       *       0     
+S1       RainBarrels   32     0.46452   0.0      0       17      1      *       *       0     
+S4       Raingarden      30     46.452    0.0      0       80      0      *       *       0     
+S5       PorousPave    1      21635.0   208.18   0       0       0      *       *       0     
+S5       GreenRoof     1      1709.4    41.453   0       0       0      *       *       0     
+Swale3   Swale         1      1335.5    13.716   0       0       0      *       *       0     
+Swale4   Swale         1      2023.4    13.716   0       0       0      *       *       0     
+Swale6   Swale         1      1659.2    13.716   0       0       0      *       *       0     
+
+[JUNCTIONS]
+;;Name           Elevation  MaxDepth   InitDepth  SurDepth   Aponded   
+;;-------------- ---------- ---------- ---------- ---------- ----------
+J1               1515       0          0          0          0         
+
+[OUTFALLS]
+;;Name           Elevation  Type       Stage Data       Gated    Route To        
+;;-------------- ---------- ---------- ---------------- -------- ----------------
+O1               1512.4 FREE                        NO                       
+
+[CONDUITS]
+;;Name           From Node        To Node          Length     Roughness  InOffset   OutOffset  InitFlow   MaxFlow   
+;;-------------- ---------------- ---------------- ---------- ---------- ---------- ---------- ---------- ----------
+CANAL            J1               O1               100        0.01       0          0          0          0         
+
+[XSECTIONS]
+;;Link           Shape        Geom1            Geom2      Geom3      Geom4      Barrels    Culvert   
+;;-------------- ------------ ---------------- ---------- ---------- ---------- ---------- ----------
+CANAL            RECT_OPEN    1                5          0          0          1                    
+
+[TIMESERIES]
+;;       Date   Time   Value   
+2-yr            0:00   6.8751
+2-yr            0:05   7.8234
+2-yr            0:10   9.0088
+2-yr            0:15   15.173
+2-yr            0:20   19.203
+2-yr            0:25   37.22 
+2-yr            0:30   67.566
+2-yr            0:35   27.975
+2-yr            0:40   16.832
+2-yr            0:45   9.957 
+2-yr            0:50   8.2975
+2-yr            0:55   7.1122
+2-yr            1:00   4.7415
+2-yr            1:05   4.5044
+2-yr            1:10   4.2673
+2-yr            1:15   4.0302
+2-yr            1:20   4.0302
+2-yr            1:25   3.7932
+2-yr            1:30   3.5561
+2-yr            1:35   3.5561
+2-yr            1:40   3.319 
+2-yr            1:45   3.319 
+2-yr            1:50   3.0819
+2-yr            1:55   3.0819
+10-yr           0:00   11.617
+10-yr           0:05   13.276
+10-yr           0:10   15.41 
+10-yr           0:15   25.841
+10-yr           0:20   32.953
+10-yr           0:25   63.773
+10-yr           0:30   115.46
+10-yr           0:35   47.889
+10-yr           0:40   28.686
+10-yr           0:45   16.832
+10-yr           0:50   14.224
+10-yr           0:55   12.328
+10-yr           1:00   9.2458
+10-yr           1:05   8.7717
+10-yr           1:10   8.2975
+10-yr           1:15   8.0605
+10-yr           1:20   7.5863
+10-yr           1:25   7.3493
+10-yr           1:30   7.1122
+10-yr           1:35   6.8751
+10-yr           1:40   6.638 
+10-yr           1:45   6.401 
+10-yr           1:50   6.1639
+10-yr           1:55   5.9268
+100-yr          0:00   23.707
+100-yr          0:05   27.026
+100-yr          0:10   31.531
+100-yr          0:15   52.867
+100-yr          0:20   67.329
+100-yr          0:25   130.16
+100-yr          0:30   235.89
+100-yr          0:35   97.676
+100-yr          0:40   58.794
+100-yr          0:45   34.613
+100-yr          0:50   28.923
+100-yr          0:55   25.13 
+100-yr          1:00   23.707
+100-yr          1:05   22.522
+100-yr          1:10   21.574
+100-yr          1:15   20.625
+100-yr          1:20   19.914
+100-yr          1:25   19.203
+100-yr          1:30   18.492
+100-yr          1:35   17.78 
+100-yr          1:40   17.306
+100-yr          1:45   16.832
+100-yr          1:50   16.358
+100-yr          1:55   15.884
+
+[REPORT]
+;;Reporting Options
+INPUT      YES
+SUBCATCHMENTS ALL
+NODES ALL
+LINKS ALL
+
+[TAGS]
+
+[MAP]
+DIMENSIONS -57.202 -29.165 1842.943 1512.277
+Units      Feet
+
+[COORDINATES]
+;;Node           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+J1               1589.776           342.775           
+O1               1756.573           162.557           
+
+[VERTICES]
+;;Link           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+
+[Polygons]
+;;Subcatchment   X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+S1               282.657            1334.810          
+S1               111.700            1101.604          
+S1               172.525            1062.743          
+S1               231.660            1027.262          
+S1               306.002            990.092           
+S1               370.206            959.679           
+S1               409.066            946.163           
+S1               444.547            936.025           
+S1               493.545            924.198           
+S1               532.405            915.750           
+S1               569.576            907.302           
+S1               610.125            897.165           
+S1               655.744            897.165           
+S1               684.338            1318.700          
+S1               651.043            1321.922          
+S1               596.269            1332.662          
+S1               551.160            1346.624          
+S1               495.312            1367.030          
+S1               455.573            1384.214          
+S1               410.465            1409.991          
+S1               386.836            1427.175          
+S1               363.208            1442.211          
+S2               678.967            1238.149          
+S2               673.584            1152.903          
+S2               655.744            897.165           
+S2               758.808            893.786           
+S2               817.943            895.475           
+S2               880.458            898.855           
+S2               921.007            905.613           
+S2               978.453            920.819           
+S2               1042.657           937.715           
+S2               1103.482           959.679           
+S2               1159.238           985.023           
+S2               1225.131           1010.367          
+S2               1109.646           1274.665          
+S2               1052.723           1400.325          
+S2               985.061            1370.252          
+S2               924.916            1348.772          
+S2               861.549            1331.588          
+S2               815.367            1325.144          
+S2               762.740            1319.774          
+S2               719.780            1316.552          
+S2               684.338            1317.626          
+S3               109.199            1103.258          
+S3               141.754            1081.555          
+S3               190.586            1051.713          
+S3               247.557            1019.158          
+S3               304.528            989.317           
+S3               354.716            964.900           
+S3               398.123            949.980           
+S3               490.166            922.509           
+S3               474.292            876.374           
+S3               501.993            816.065           
+S3               556.059            778.895           
+S3               488.476            679.210           
+S3               422.582            729.897           
+S3               282.348            557.560           
+S3               179.734            633.927           
+S3               153.962            651.561           
+S3               107.843            693.610           
+S3               71.218             742.443           
+S3               48.159             785.849           
+S3               31.881             837.394           
+S3               29.168             886.226           
+S3               31.881             933.702           
+S3               38.664             967.613           
+S3               50.872             1001.525          
+S3               65.793             1035.436          
+S3               87.496             1070.704          
+S3               109.199            1103.258          
+S4               282.348            559.250           
+S4               420.893            729.897           
+S4               488.476            680.899           
+S4               556.828            779.067           
+S4               501.213            814.335           
+S4               474.292            876.374           
+S4               491.718            922.851           
+S4               616.511            898.434           
+S4               668.056            897.078           
+S4               783.355            895.722           
+S4               815.909            898.434           
+S4               857.959            899.791           
+S4               890.595            897.165           
+S4               968.316            915.750           
+S4               1042.657           937.715           
+S4               1074.759           849.857           
+S4               1054.484           773.826           
+S4               1020.692           702.864           
+S4               963.247            623.454           
+S4               689.536            256.816           
+S5               1397.873           478.033           
+S5               1408.099           429.463           
+S5               1372.310           393.674           
+S5               1336.522           339.991           
+S5               1287.951           268.414           
+S5               1247.050           168.718           
+S5               1226.600           51.127            
+S5               1027.206           46.014            
+S5               807.362            40.901            
+S5               789.468            109.922           
+S5               740.898            186.612           
+S5               694.884            258.189           
+S5               1023.446           704.462           
+S5               1150.644           618.812           
+S5               1224.043           562.392           
+S5               1313.515           503.596           
+S6               1122.467           968.970           
+S6               1174.012           987.282           
+S6               1225.557           1005.594          
+S6               1377.480           675.977           
+S6               1391.044           642.065           
+S6               1396.470           598.659           
+S6               1395.317           480.589           
+S6               1316.071           503.596           
+S6               1216.374           570.061           
+S6               1150.644           617.241           
+S6               1020.733           704.462           
+S6               1054.645           772.285           
+S6               1076.796           848.212           
+S6               1056.370           900.062           
+S6               1040.658           937.772           
+Swale3           283.315            920.277           
+Swale3           616.781            831.709           
+Swale3           633.132            871.873           
+Swale3           290.984            958.622           
+Swale4           617.343            831.761           
+Swale4           1113.210           830.993           
+Swale4           1116.207           879.551           
+Swale4           633.558            871.873           
+Swale6           1113.809           831.592           
+Swale6           1177.955           787.230           
+Swale6           1213.337           741.244           
+Swale6           1366.957           486.918           
+Swale6           1392.560           504.840           
+Swale6           1298.681           680.649           
+Swale6           1238.940           778.795           
+Swale6           1133.967           876.941           
+Swale6           1116.207           879.551           
+
+[SYMBOLS]
+;;Gage           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+RainGage         95.211             1382.022          
+
