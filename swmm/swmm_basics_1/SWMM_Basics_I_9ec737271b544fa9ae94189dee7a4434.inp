@@ -1,0 +1,241 @@
+[TITLE]
+;;Project Title/Notes
+Example 1
+Pre-Development Runoff
+
+[OPTIONS]
+;;Option             Value
+FLOW_UNITS           CMS
+INFILTRATION         HORTON
+FLOW_ROUTING         DYNWAVE
+LINK_OFFSETS         DEPTH
+MIN_SLOPE            0
+ALLOW_PONDING        NO
+SKIP_STEADY_STATE    NO
+
+START_DATE           01/01/2007
+START_TIME           00:00:00
+REPORT_START_DATE    01/01/2007
+REPORT_START_TIME    00:00:00
+END_DATE             01/01/2007
+END_TIME             12:00:00
+SWEEP_START          01/01
+SWEEP_END            12/31
+DRY_DAYS             0
+REPORT_STEP          00:01:00
+WET_STEP             00:01:00
+DRY_STEP             01:00:00
+ROUTING_STEP         0:00:10 
+RULE_STEP            00:00:00
+
+INERTIAL_DAMPING     PARTIAL
+NORMAL_FLOW_LIMITED  SLOPE
+FORCE_MAIN_EQUATION  H-W
+VARIABLE_STEP        0.75
+LENGTHENING_STEP     0
+MIN_SURFAREA         1.14
+MAX_TRIALS           8
+HEAD_TOLERANCE       0.0015
+SYS_FLOW_TOL         5
+LAT_FLOW_TOL         5
+MINIMUM_STEP         0.5
+THREADS              1
+
+[EVAPORATION]
+;;Data Source    Parameters
+;;-------------- ----------------
+CONSTANT         0.0
+DRY_ONLY         NO
+
+[RAINGAGES]
+;;Name           Format    Interval SCF      Source    
+;;-------------- --------- ------ ------ ----------
+RainGage         INTENSITY 0:05     1.0      TIMESERIES 100-yr          
+
+[SUBCATCHMENTS]
+;;   Raingage   Outlet      Area   PercImperv Width PercSlope CurbLength SnowPack
+S1   RainGage   Reservoir   14.5   48.1       765   0.5       0                
+
+[SUBAREAS]
+;;Subcatchment   N-Imperv   N-Perv     S-Imperv   S-Perv     PctZero    RouteTo    PctRouted 
+;;-------------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
+S1               0.015      0.24       0.06       0.3        25         OUTLET    
+
+[INFILTRATION]
+;;Subcatchment   Param1     Param2     Param3     Param4     Param5    
+;;-------------- ---------- ---------- ---------- ---------- ----------
+S1               115        5          6.5        7          0         
+
+[JUNCTIONS]
+;;   InvertElev MaxDepth InitDepth SurchargeDepth PondedArea
+O1   1513       0.0      0         0              0       
+
+[OUTFALLS]
+;;Name           Elevation  Type       Stage Data       Gated    Route To        
+;;-------------- ---------- ---------- ---------------- -------- ----------------
+1                1500       FREE                        NO                       
+
+[STORAGE]
+;;Name           Elev.    MaxDepth   InitDepth  Shape      Curve Type/Params            SurDepth  Fevap    Psi      Ksat     IMD     
+;;-------------- -------- ---------- ----------- ---------- ---------------------------- --------- --------          -------- --------
+Reservoir        1525     2.0        0          FUNCTIONAL 1255       0          0        0         0       
+
+[CONDUITS]
+;;  InletNode   OutletNode Length  Roughness InOffset OutOffset InitFlow MaxFlow
+1   Reservoir   O1         689.0   0.01      1        0         0        0    
+2   Reservoir   O1         689.0   0.01      0        0         0        0    
+3   O1          1          689.0   0.01      0        0         0        0    
+
+[XSECTIONS]
+;;  Shape       Geom1   Geom2 Geom3 Geom4 Barrels Culvert
+1   RECT_OPEN   0.982   10    0     0     1            
+2   CIRCULAR    0.295   0     0     0     1            
+3   RECT_OPEN   0.982   10    0     0     1            
+
+[TIMESERIES]
+;;       Date   Time   Value  
+2-yr            0:00   7.26 
+2-yr            0:05   8.25 
+2-yr            0:10   9.52 
+2-yr            0:15   16.0 
+2-yr            0:20   20.2 
+2-yr            0:25   39.2 
+2-yr            0:30   71.1 
+2-yr            0:35   29.5 
+2-yr            0:40   17.7 
+2-yr            0:45   10.5 
+2-yr            0:50   8.74 
+2-yr            0:55   7.46 
+2-yr            1:00   5.01 
+2-yr            1:05   4.71 
+2-yr            1:10   4.52 
+2-yr            1:15   4.22 
+2-yr            1:20   4.22 
+2-yr            1:25   4.03 
+2-yr            1:30   3.73 
+2-yr            1:35   3.73 
+2-yr            1:40   3.53 
+2-yr            1:45   3.53 
+2-yr            1:50   3.24 
+2-yr            1:55   3.24 
+10-yr           0:00   12.2 
+10-yr           0:05   13.9 
+10-yr           0:10   16.2 
+10-yr           0:15   27.2 
+10-yr           0:20   34.7 
+10-yr           0:25   67.1 
+10-yr           0:30   121.0
+10-yr           0:35   50.4 
+10-yr           0:40   30.1 
+10-yr           0:45   17.7 
+10-yr           0:50   14.9 
+10-yr           0:55   13.0 
+10-yr           1:00   9.72 
+10-yr           1:05   9.23 
+10-yr           1:10   8.74 
+10-yr           1:15   8.44 
+10-yr           1:20   7.95 
+10-yr           1:25   7.76 
+10-yr           1:30   7.46 
+10-yr           1:35   7.26 
+10-yr           1:40   6.97 
+10-yr           1:45   6.77 
+10-yr           1:50   6.48 
+10-yr           1:55   6.28 
+100-yr          0:00   24.9 
+100-yr          0:05   28.5 
+100-yr          0:10   33.2 
+100-yr          0:15   55.6 
+100-yr          0:20   70.8 
+100-yr          0:25   137.0
+100-yr          0:30   248.0
+100-yr          0:35   103.0
+100-yr          0:40   61.8 
+100-yr          0:45   36.4 
+100-yr          0:50   30.4 
+100-yr          0:55   26.4 
+100-yr          1:00   24.9 
+100-yr          1:05   23.7 
+100-yr          1:10   22.7 
+100-yr          1:15   21.7 
+100-yr          1:20   20.9 
+100-yr          1:25   20.2 
+100-yr          1:30   19.4 
+100-yr          1:35   18.8 
+100-yr          1:40   18.2 
+100-yr          1:45   17.7 
+100-yr          1:50   17.2 
+100-yr          1:55   16.7 
+
+[REPORT]
+;;Reporting Options
+SUBCATCHMENTS ALL
+NODES ALL
+LINKS ALL
+
+[TAGS]
+
+[MAP]
+DIMENSIONS -181.576 -57.804 1473.452 1516.375
+Units      Feet
+
+[COORDINATES]
+;;Node           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+O1               1307.547           200.842           
+1                1391.771           146.852           
+Reservoir        1095.907           468.631           
+
+[VERTICES]
+;;Link           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+2                1113.184           332.577           
+2                1195.248           233.236           
+
+[Polygons]
+;;Subcatchment   X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+S1               1237.713           32.335            
+S1               1234.334           106.677           
+S1               1239.402           179.328           
+S1               1257.988           238.464           
+S1               1290.090           306.047           
+S1               1369.500           447.971           
+S1               1389.775           502.038           
+S1               1396.533           552.725           
+S1               1398.223           615.239           
+S1               1381.327           681.133           
+S1               1060.307           1402.582          
+S1               1006.241           1378.928          
+S1               909.935            1343.446          
+S1               852.490            1331.619          
+S1               771.390            1321.482          
+S1               702.117            1319.792          
+S1               624.397            1329.930          
+S1               555.124            1348.515          
+S1               474.024            1378.928          
+S1               416.579            1411.030          
+S1               367.581            1444.821          
+S1               80.353             1057.908          
+S1               51.630             995.394           
+S1               33.045             919.363           
+S1               34.735             858.538           
+S1               56.699             780.818           
+S1               93.870             716.614           
+S1               136.109            670.995           
+S1               350.685            517.244           
+S1               597.364            333.080           
+S1               673.394            275.634           
+S1               735.909            231.705           
+S1               771.390            197.914           
+S1               786.596            172.570           
+S1               805.181            148.916           
+S1               815.319            104.987           
+S1               818.698            64.437            
+S1               820.388            13.750            
+
+[SYMBOLS]
+;;Gage           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+RainGage         -106.347           1214.507          
+

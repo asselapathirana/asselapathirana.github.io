@@ -1,0 +1,240 @@
+[TITLE]
+;;Project Title/Notes
+Sewer sytem file
+
+[OPTIONS]
+;;Option             Value
+FLOW_UNITS           CMS
+INFILTRATION         HORTON
+FLOW_ROUTING         DYNWAVE
+LINK_OFFSETS         DEPTH
+MIN_SLOPE            0
+ALLOW_PONDING        NO
+SKIP_STEADY_STATE    NO
+
+START_DATE           01/01/1995
+START_TIME           00:00:00
+REPORT_START_DATE    01/01/1995
+REPORT_START_TIME    00:00:00
+END_DATE             01/01/1995
+END_TIME             01:59:00
+SWEEP_START          01/01
+SWEEP_END            12/31
+DRY_DAYS             0
+REPORT_STEP          00:03:00
+WET_STEP             00:03:00
+DRY_STEP             00:30:00
+ROUTING_STEP         0:00:01 
+RULE_STEP            00:00:00
+
+INERTIAL_DAMPING     PARTIAL
+NORMAL_FLOW_LIMITED  BOTH
+FORCE_MAIN_EQUATION  H-W
+VARIABLE_STEP        0.00
+LENGTHENING_STEP     0
+MIN_SURFAREA         1.167
+MAX_TRIALS           8
+HEAD_TOLERANCE       0.0015
+SYS_FLOW_TOL         5
+LAT_FLOW_TOL         5
+MINIMUM_STEP         0.5
+THREADS              1
+
+[EVAPORATION]
+;;Data Source    Parameters
+;;-------------- ----------------
+CONSTANT         0.0
+DRY_ONLY         NO
+
+[RAINGAGES]
+;;Name           Format    Interval SCF      Source    
+;;-------------- --------- ------ ------ ----------
+Raingage1        VOLUME    0:05     1.0      TIMESERIES BUI4            
+
+[SUBCATCHMENTS]
+;;     Raingage    Outlet Area     PercImperv Width PercSlope CurbLength SnowPack
+S21    Raingage1   JUX    0.66     62.1       500   0.5       0                
+S22    Raingage1   JUX    0.414    59.7       500   0.5       0                
+S23    Raingage1   J22    0.0326   76.2       500   0.5       0                
+S24    Raingage1   J22    0.184    61.0       500   0.5       0                
+S25    Raingage1   J25    0.551    45.1       500   0.5       0                
+S458   Raingage1   J24    0.136    62.8       500   0.5       0                
+S460   Raingage1   JUX    0.331    66.0       500   0.5       0                
+
+[SUBAREAS]
+;;Subcatchment   N-Imperv   N-Perv     S-Imperv   S-Perv     PctZero    RouteTo    PctRouted 
+;;-------------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
+S21              0.013      0.09       0.46       1.07       25         OUTLET    
+S22              0.013      0.09       0.46       0.73       25         OUTLET    
+S23              0.014      0.03       0.4        0.36       25         OUTLET    
+S24              0.014      0.1        0.5        0.78       25         OUTLET    
+S25              0.01       0.08       0.35       0.56       25         OUTLET    
+S458             0.014      0.09       0.45       1.36       25         OUTLET    
+S460             0.014      0.08       0.48       0.76       25         OUTLET    
+
+[INFILTRATION]
+;;Subcatchment   Param1     Param2     Param3     Param4     Param5    
+;;-------------- ---------- ---------- ---------- ---------- ----------
+S21              3.8        0.85       2.6        3.5        0         
+S22              4.1        0.86       2.6        3.5        0         
+S23              1          0.24       1          1.3        0         
+S24              4.6        0.95       2.9        3.9        0         
+S25              3.8        0.78       2.4        3.2        0         
+S458             3.6        0.85       2.7        3.7        0         
+S460             3.8        0.82       2.5        3.3        0         
+
+[JUNCTIONS]
+;;    InvertElev MaxDepth InitDepth SurchargeDepth PondedArea
+JUX   -1.27      2.49     0         0              0       
+J22   -1.25      2.43     0         0              0       
+J25   -0.9       1.86     0         0              0       
+J24   -1.1       2.29     0         0              0       
+J5    -1.2       2.43     0         0              0       
+
+[OUTFALLS]
+;;Name           Elevation  Type       Stage Data       Gated    Route To        
+;;-------------- ---------- ---------- ---------------- -------- ----------------
+OUTFALL          -1.33      FREE                        NO                       
+
+[CONDUITS]
+;;   InletNode OutletNode Length  Roughness InOffset OutOffset InitFlow MaxFlow
+32   JUX       OUTFALL    433.0   0.012     0        0         0        0    
+33   J22       JUX        63.0    0.012     0        0         0        0    
+34   J5        J22        22.4    0.012     0        0         0        0    
+35   J24       J5         10.8    0.012     0        0         0        0    
+38   J25       J24        82.0    0.012     0        0         0        0    
+
+[XSECTIONS]
+;;   Shape          Geom1   Geom2          Geom3 Geom4 Barrels Culvert
+32   VERT_ELLIPSE   0.391   0.6            0     0     1            
+33   VERT_ELLIPSE   0.391   0.6            0     0     1            
+34   VERT_ELLIPSE   0.391   0.6            0     0     1            
+35   CIRCULAR       0.391   0.3979700505   0     0     1            
+38   CIRCULAR       0.391   0.3979700505   0     0     1            
+
+[CURVES]
+;;Name           Type       X-Value    Y-Value   
+;;-------------- ---------- ---------- ----------
+PUMP1            Pump2      0.01       0         
+PUMP1                       0.21       0.0022    
+;
+PUMP2            Pump2      0.3        0         
+PUMP2                       0.45       0.125     
+PUMP2                       1.8        0.417     
+;
+PUMP3            Pump2      0.05       0         
+PUMP3                       1          0.09722   
+PUMP3                       1.8        0.4722    
+;
+PUMP4            Pump2      3.1        0         
+PUMP4                       3.3        0.6111    
+
+[TIMESERIES]
+;;     Date         Time       Value  
+BUI4   01/01/1995   00:00:00   0.161
+BUI4   01/01/1995   00:05:00   0.321
+BUI4   01/01/1995   00:10:00   0.482
+BUI4   01/01/1995   00:15:00   0.642
+BUI4   01/01/1995   00:20:00   0.803
+BUI4   01/01/1995   00:25:00   0.964
+BUI4   01/01/1995   00:30:00   1.12 
+BUI4   01/01/1995   00:35:00   1.28 
+BUI4   01/01/1995   00:40:00   1.61 
+BUI4   01/01/1995   00:45:00   2.25 
+BUI4   01/01/1995   00:50:00   2.25 
+BUI4   01/01/1995   00:55:00   1.61 
+BUI4   01/01/1995   01:00:00   0.964
+BUI4   01/01/1995   01:05:00   0.642
+BUI4   01/01/1995   01:10:00   0.321
+BUI4   01/01/1995   01:15:00   0.0  
+BUI4   01/01/1995   01:20:00   0.0  
+BUI4   01/01/1995   01:25:00   0.0  
+BUI4   01/01/1995   01:30:00   0.0  
+BUI4   01/01/1995   01:35:00   0.0  
+BUI4   01/01/1995   01:40:00   0.0  
+BUI4   01/01/1995   01:45:00   0.0  
+BUI4   01/01/1995   01:50:00   0.0  
+BUI4   01/01/1995   01:55:00   0.0  
+
+[REPORT]
+;;Reporting Options
+SUBCATCHMENTS ALL
+NODES ALL
+LINKS ALL
+
+[TAGS]
+
+[MAP]
+DIMENSIONS 88450.174 438410.831 88768.311 438695.310
+Units      Meters
+
+[COORDINATES]
+;;Node           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+JUX              88576.842          438528.446        
+J22              88586.238          438535.250        
+J25              88559.290          438596.200        
+J24              88581.320          438562.000        
+J5               88571.658          438555.339        
+OUTFALL          88634.191          438438.048        
+
+[VERTICES]
+;;Link           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+
+[Polygons]
+;;Subcatchment   X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+S21              88613.880          438463.530        
+S21              88551.678          438423.762        
+S21              88519.564          438549.081        
+S21              88549.350          438544.175        
+S21              88570.273          438531.262        
+S21              88613.880          438463.530        
+S22              88663.137          438493.935        
+S22              88626.837          438470.878        
+S22              88629.676          438466.037        
+S22              88622.664          438461.863        
+S22              88618.323          438466.371        
+S22              88613.880          438463.530        
+S22              88570.273          438531.262        
+S22              88569.283          438557.967        
+S22              88576.860          438555.958        
+S22              88663.137          438493.935        
+S23              88570.273          438531.262        
+S23              88549.350          438544.175        
+S23              88568.145          438559.563        
+S23              88569.283          438557.967        
+S23              88570.273          438531.262        
+S23              88570.273          438531.262        
+S24              88568.145          438559.563        
+S24              88549.350          438544.175        
+S24              88519.564          438549.081        
+S24              88497.959          438581.448        
+S24              88564.174          438575.151        
+S24              88568.145          438559.563        
+S25              88493.619          438584.756        
+S25              88548.402          438619.073        
+S25              88545.148          438624.398        
+S25              88603.190          438661.874        
+S25              88607.816          438603.263        
+S25              88564.174          438575.151        
+S25              88497.959          438581.448        
+S25              88493.619          438584.756        
+S458             88576.860          438555.958        
+S458             88569.283          438557.967        
+S458             88568.145          438559.563        
+S458             88564.174          438575.151        
+S458             88607.816          438603.263        
+S458             88619.034          438583.043        
+S458             88576.860          438555.958        
+S460             88672.254          438499.726        
+S460             88663.137          438493.935        
+S460             88576.860          438555.958        
+S460             88619.034          438583.043        
+S460             88672.254          438499.726        
+
+[SYMBOLS]
+;;Gage           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+
