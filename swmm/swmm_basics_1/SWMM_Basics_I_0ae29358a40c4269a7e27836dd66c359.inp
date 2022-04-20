@@ -1,0 +1,246 @@
+[TITLE]
+;;Project Title/Notes
+
+[OPTIONS]
+;;Option             Value
+FLOW_UNITS           CMS
+INFILTRATION         HORTON
+FLOW_ROUTING         DYNWAVE
+LINK_OFFSETS         ELEVATION
+MIN_SLOPE            0
+ALLOW_PONDING        NO
+SKIP_STEADY_STATE    NO
+
+IGNORE_QUALITY       YES
+START_DATE           10/05/2009
+START_TIME           14:00:00
+REPORT_START_DATE    10/05/2009
+REPORT_START_TIME    14:00:00
+END_DATE             10/06/2009
+END_TIME             01:00:00
+SWEEP_START          01/01
+SWEEP_END            12/31
+DRY_DAYS             0
+REPORT_STEP          00:15:00
+WET_STEP             00:05:00
+DRY_STEP             01:00:00
+ROUTING_STEP         0.05
+RULE_STEP            00:00:00
+
+INERTIAL_DAMPING     PARTIAL
+NORMAL_FLOW_LIMITED  BOTH
+FORCE_MAIN_EQUATION  H-W
+VARIABLE_STEP        0.00
+LENGTHENING_STEP     0
+MIN_SURFAREA         1.167
+MAX_TRIALS           8
+HEAD_TOLERANCE       0.0015
+SYS_FLOW_TOL         5
+LAT_FLOW_TOL         5
+MINIMUM_STEP         0.5
+THREADS              1
+
+[EVAPORATION]
+;;Data Source    Parameters
+;;-------------- ----------------
+CONSTANT         0.0
+DRY_ONLY         NO
+
+[RAINGAGES]
+;;Name           Format    Interval SCF      Source    
+;;-------------- --------- ------ ------ ----------
+RG_CanTho        INTENSITY 1:00     1.0      TIMESERIES Rain_hour_2009  
+
+[SUBCATCHMENTS]
+;;      Raingage    Outlet  Area   PercImperv Width  PercSlope CurbLength SnowPack
+S_297   RG_CanTho   J_358   17.8   59.5       792    0.1       0                
+S_300   RG_CanTho   J_357   30.3   59.5       1090   0.1       0                
+S_301   RG_CanTho   J_360   11.5   59.5       567    0.1       0                
+
+[SUBAREAS]
+;;Subcatchment   N-Imperv   N-Perv     S-Imperv   S-Perv     PctZero    RouteTo    PctRouted 
+;;-------------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
+S_297            0.05       0.08       2          5          25         OUTLET    
+S_300            0.05       0.08       2          5          25         OUTLET    
+S_301            0.05       0.08       2          5          25         OUTLET    
+
+[INFILTRATION]
+;;Subcatchment   Param1     Param2     Param3     Param4     Param5    
+;;-------------- ---------- ---------- ---------- ---------- ----------
+S_297            7          3          4          7          0         
+S_300            7          3          4          7          0         
+S_301            7          3          4          7          0         
+
+[JUNCTIONS]
+;;      InvertElev MaxDepth InitDepth SurchargeDepth PondedArea
+J_357   0.29       2.62     0         0              0       
+J_358   0.29       2.62     0         0              0       
+J_359   0.82       2.62     0         0              0       
+J_360   0.29       2.62     0         0              0       
+J_361   -0.54      2.62     0         0              0       
+
+[OUTFALLS]
+;;Name           Elevation  Type       Stage Data       Gated    Route To        
+;;-------------- ---------- ---------- ---------------- -------- ----------------
+O_19             -0.98      TIMESERIES WL_hour_2009     NO                       
+
+[CONDUITS]
+;;      InletNode OutletNode Length   Roughness InOffset OutOffset InitFlow MaxFlow
+C_466   J_357     J_360      1880.0   0.014     0        0         0        0    
+C_467   J_358     J_359      1870.0   0.014     0        0         0        0    
+C_468   J_359     J_360      28.2     0.014     0        0         0        0    
+C_469   J_360     J_361      579.0    0.014     0        0         0        0    
+C_470   J_361     O_19       55.2     0.014     0        0         0        0    
+
+[XSECTIONS]
+;;      Shape       Geom1   Geom2 Geom3 Geom4 Barrels Culvert
+C_466   CIRCULAR    0.966   0     0     0     1            
+C_467   RECT_OPEN   1.93    2     0     0     1            
+C_468   CIRCULAR    0.966   0     0     0     1            
+C_469   CIRCULAR    0.966   0     0     0     1            
+C_470   CIRCULAR    0.966   0     0     0     1            
+
+[POLLUTANTS]
+;;Name           Units  Crain      Cgw        Crdii      Kdecay     SnowOnly   Co-Pollutant     Co-Frac    Cdwf       Cinit     
+;;-------------- ------ ---------- ---------- ---------- ---------- ---------- ---------------- ---------- ---------- ----------
+COD              MG/L   0.0        0.0        0.0        0.0        NO         *                0.0        0.0        0         
+
+[LOADINGS]
+;;Subcatchment   Pollutant        Buildup   
+;;-------------- ---------------- ----------
+
+[CURVES]
+;;Name           Type       X-Value    Y-Value   
+;;-------------- ---------- ---------- ----------
+;Capacity: 335 m3/h = 0.093 m3/s
+PSa              Pump4      0          0         
+PSa                         0.999      0         
+PSa                         1          0.093055556
+PSa                         2          0.093055556
+;
+;Capacity: 414 m3/h = 0.115 m3/s
+PSb              Pump4      0          0         
+PSb                         0.999      0         
+PSb                         1          0.115     
+PSb                         2          0.115     
+;
+;Capacity: 68.5 m3/h = 0.019 m3/s
+PSc              Pump4      0          0         
+PSc                         0.999      0         
+PSc                         1          0.019027778
+PSc                         2          0.019027778
+;
+;Capacity: 104.5 m3/h = 0.029 m3/s
+PSd              Pump4      0          0         
+PSd                         0.999      0         
+PSd                         1          0.029027778
+PSd                         2          0.029027778
+;
+;Capacity: 187 m3/h = 0.052 m3/s
+PSe              Pump4      0          0         
+PSe                         0.999      0         
+PSe                         1          0.051944444
+PSe                         2          0.051944444
+;
+;Capacity: 929 m3/h = 0.258 m3/s
+PS2              Pump4      0          0         
+PS2                         0.999      0         
+PS2                         1          0.258055556
+PS2                         2          0.258055556
+;
+;Capacity: 443 m3/h = 0.123 m3/s
+PS3              Pump4      0          0         
+PS3                         0.999      0         
+PS3                         1          0.123055556
+PS3                         2          0.123055556
+;
+;Capacity: 2617 m3/h = 0.727 m3/s
+PS4              Pump4      0          0         
+PS4                         0.999      0         
+PS4                         1          0.726944444
+PS4                         2          0.726944444
+
+[TIMESERIES]
+;;               Date        Time    Value  
+Rain_hour_2009   10/5/2009   14:00   0.0  
+Rain_hour_2009   10/5/2009   15:00   46.8 
+Rain_hour_2009   10/5/2009   16:00   38.0 
+Rain_hour_2009   10/5/2009   17:00   2.78 
+Rain_hour_2009   10/5/2009   18:00   0.535
+Rain_hour_2009   10/5/2009   19:00   0.0  
+Rain_hour_2009   10/5/2009   20:00   0.0  
+Rain_hour_2009   10/5/2009   21:00   0.0  
+Rain_hour_2009   10/5/2009   22:00   0.0  
+Rain_hour_2009   10/5/2009   23:00   0.0  
+Rain_hour_2009   10/6/2009   0:00    0.0  
+Rain_hour_2009   10/6/2009   1:00    0.0  
+WL_hour_2009     10/5/2009   14:00   0.3  
+WL_hour_2009     10/5/2009   15:00   0.749
+WL_hour_2009     10/5/2009   16:00   1.5  
+WL_hour_2009     10/5/2009   17:00   1.81 
+WL_hour_2009     10/5/2009   18:00   1.8  
+WL_hour_2009     10/5/2009   19:00   1.56 
+WL_hour_2009     10/5/2009   20:00   1.28 
+WL_hour_2009     10/5/2009   21:00   1.02 
+WL_hour_2009     10/5/2009   22:00   0.802
+WL_hour_2009     10/5/2009   23:00   0.653
+WL_hour_2009     10/6/2009   0:00    0.535
+WL_hour_2009     10/6/2009   1:00    0.46 
+
+[REPORT]
+;;Reporting Options
+SUBCATCHMENTS ALL
+NODES ALL
+LINKS ALL
+
+[TAGS]
+
+[MAP]
+DIMENSIONS 585513.739 1110470.844 586880.261 1111406.893
+Units      Meters
+
+[COORDINATES]
+;;Node           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+J_357            585711.070         1110694.020       
+J_358            585704.670         1110705.550       
+J_359            586345.530         1111148.730       
+J_360            586355.780         1111142.960       
+J_361            586568.300         1111250.250       
+O_19             586592.000         1111288.500       
+
+[VERTICES]
+;;Link           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+C_469            586368.132         1111139.258       
+
+[Polygons]
+;;Subcatchment   X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+S_297            585713.025         1110701.745       
+S_297            585603.159         1110624.839       
+S_297            585575.854         1110651.915       
+S_297            585661.170         1110926.141       
+S_297            586248.226         1111310.714       
+S_297            586356.522         1111145.916       
+S_300            586159.143         1110687.364       
+S_300            586818.138         1110738.714       
+S_300            586597.760         1110888.486       
+S_300            586356.510         1111145.926       
+S_300            585603.334         1110625.121       
+S_300            585623.757         1110605.086       
+S_300            585760.099         1110513.392       
+S_301            586330.477         1111364.345       
+S_301            586433.338         1111225.482       
+S_301            586545.199         1111287.199       
+S_301            586663.490         1111116.192       
+S_301            586818.146         1110738.730       
+S_301            586597.789         1110888.325       
+S_301            586356.523         1111145.917       
+S_301            586248.167         1111310.584       
+
+[SYMBOLS]
+;;Gage           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+RG_CanTho        585919.790         1111276.449       
+
