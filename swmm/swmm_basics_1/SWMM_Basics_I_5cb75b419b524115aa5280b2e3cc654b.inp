@@ -1,0 +1,257 @@
+[TITLE]
+;;Project Title/Notes
+
+[OPTIONS]
+;;Option             Value
+FLOW_UNITS           LPS
+INFILTRATION         CURVE_NUMBER
+FLOW_ROUTING         DYNWAVE
+LINK_OFFSETS         DEPTH
+MIN_SLOPE            0
+ALLOW_PONDING        NO
+SKIP_STEADY_STATE    NO
+
+START_DATE           10/28/2011
+START_TIME           00:00:00
+REPORT_START_DATE    10/28/2011
+REPORT_START_TIME    00:00:00
+END_DATE             10/28/2011
+END_TIME             06:00:00
+SWEEP_START          01/01
+SWEEP_END            12/31
+DRY_DAYS             0
+REPORT_STEP          00:01:00
+WET_STEP             00:01:00
+DRY_STEP             00:01:00
+ROUTING_STEP         0:00:01 
+RULE_STEP            00:00:00
+
+INERTIAL_DAMPING     PARTIAL
+NORMAL_FLOW_LIMITED  SLOPE
+FORCE_MAIN_EQUATION  H-W
+VARIABLE_STEP        0.75
+LENGTHENING_STEP     0
+MIN_SURFAREA         0
+MAX_TRIALS           0
+HEAD_TOLERANCE       0
+SYS_FLOW_TOL         5
+LAT_FLOW_TOL         5
+MINIMUM_STEP         0.5
+THREADS              1
+
+[EVAPORATION]
+;;Data Source    Parameters
+;;-------------- ----------------
+CONSTANT         0.0
+DRY_ONLY         NO
+
+[RAINGAGES]
+;;Name           Format    Interval SCF      Source    
+;;-------------- --------- ------ ------ ----------
+Gage1            VOLUME    0:03     1.0      TIMESERIES ABM10yrs2hrs    
+
+[SUBCATCHMENTS]
+;;   Raingage Outlet Area    PercImperv Width  PercSlope CurbLength SnowPack
+A2   Gage1    J4     119.0   43.2       1000   4.13      0                
+A1   Gage1    J1     41.7    31.0       1000   4.13      0                
+A3   Gage1    J3     62.5    34.1       1000   4.13      0                
+A4   Gage1    J10    37.0    26.7       1000   4.13      0                
+A5   Gage1    J9     31.4    10.6       1000   4.13      0                
+E1   Gage1    J8     43.0    0.0        1000   1.86      0                
+
+[SUBAREAS]
+;;Subcatchment   N-Imperv   N-Perv     S-Imperv   S-Perv     PctZero    RouteTo    PctRouted 
+;;-------------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
+A2               0.01       0.1        0.05       0.05       25         OUTLET    
+A1               0.01       0.1        0.05       0.05       25         OUTLET    
+A3               0.01       0.1        0.05       0.05       25         OUTLET    
+A4               0.01       0.1        0.05       0.05       25         OUTLET    
+A5               0.01       0.1        0.05       0.05       25         OUTLET    
+E1               0.01       0.1        0.05       0.05       25         OUTLET    
+
+[INFILTRATION]
+;;Subcatchment   Param1     Param2     Param3     Param4     Param5    
+;;-------------- ---------- ---------- ---------- ---------- ----------
+A2               90         0.5        7          7          0         
+A1               90         0.5        7          7          0         
+A3               90         0.5        7          7          0         
+A4               90         0.5        7          7          0         
+A5               90         0.5        7          7          0         
+E1               70         0.5        7          7          0         
+
+[JUNCTIONS]
+;;    InvertElev MaxDepth InitDepth SurchargeDepth PondedArea
+J2    45.633     2.48     0         0              0       
+J5    47.381     2.48     0         0              0       
+J6    41.909     2.48     0         0              0       
+J8    23.459     4.13     0         0              0       
+J9    37.689     2.76     0         0              0       
+J10   32.424     2.76     0         0              0       
+J4    52.853     2.48     0         0              0       
+J1    55.0       2.48     0         0              0       
+J3    36.437     2.48     0         0              0       
+J7    29.589     2.48     0         0              0       
+J11   27.159     2.48     0         0              0       
+
+[OUTFALLS]
+;;Name           Elevation  Type       Stage Data       Gated    Route To        
+;;-------------- ---------- ---------- ---------------- -------- ----------------
+J12              15.649     FREE                        NO                       
+
+[CONDUITS]
+;;     InletNode OutletNode Length  Roughness InOffset OutOffset InitFlow MaxFlow
+T4-1   J9        J10        174.0   0.02      0.0      0         0        0    
+T4-2   J10       J11        174.0   0.02      0.0      0         0        0    
+T4-3   J11       J8         89.2    0.02      1.5      0         0        0    
+T1-1   J1        J2         360.0   0.02      1.0      0         0        0    
+T1-2   J2        J3         595.0   0.02      0.0      0         0        0    
+T2-1   J4        J5         428.0   0.02      1.0      0         0        0    
+T2-2   J5        J6         428.0   0.02      0.0      0         0        0    
+T2-3   J6        J3         428.0   0.02      0.0      0         0        0    
+T3-1   J3        J7         636.0   0.02      1.0      0         0        0    
+T3-2   J7        J8         508.0   0.02      1.0      0         0        0    
+T5     J8        J12        349.0   0.01      0.0      0         0        0    
+
+[XSECTIONS]
+;;     Shape       Geom1   Geom2 Geom3 Geom4 Barrels Culvert
+T4-1   CIRCULAR    1.83    0     0     0     1            
+T4-2   CIRCULAR    1.83    0     0     0     1            
+T4-3   CIRCULAR    1.83    0     0     0     1            
+T1-1   CIRCULAR    1.1     0     0     0     1            
+T1-2   CIRCULAR    1.1     0     0     0     1            
+T2-1   CIRCULAR    1.83    0     0     0     1            
+T2-2   CIRCULAR    1.83    0     0     0     1            
+T2-3   CIRCULAR    1.83    0     0     0     1            
+T3-1   CIRCULAR    1.37    0     0     0     3            
+T3-2   CIRCULAR    1.37    0     0     0     2            
+T5     RECT_OPEN   0.365   3     0     0     1            
+
+[TIMESERIES]
+;;             Date   Time   Value  
+ABM10yrs2hrs          0:00   0.0  
+ABM10yrs2hrs          0:03   0.327
+ABM10yrs2hrs          0:06   0.345
+ABM10yrs2hrs          0:09   0.363
+ABM10yrs2hrs          0:12   0.381
+ABM10yrs2hrs          0:15   0.409
+ABM10yrs2hrs          0:18   0.436
+ABM10yrs2hrs          0:21   0.472
+ABM10yrs2hrs          0:24   0.509
+ABM10yrs2hrs          0:27   0.554
+ABM10yrs2hrs          0:30   0.609
+ABM10yrs2hrs          0:33   0.672
+ABM10yrs2hrs          0:36   0.745
+ABM10yrs2hrs          0:39   0.845
+ABM10yrs2hrs          0:42   0.981
+ABM10yrs2hrs          0:45   1.15 
+ABM10yrs2hrs          0:48   1.4  
+ABM10yrs2hrs          0:51   1.76 
+ABM10yrs2hrs          0:54   2.34 
+ABM10yrs2hrs          0:57   3.41 
+ABM10yrs2hrs          1:00   5.75 
+ABM10yrs2hrs          1:03   4.31 
+ABM10yrs2hrs          1:06   2.79 
+ABM10yrs2hrs          1:09   2.02 
+ABM10yrs2hrs          1:12   1.55 
+ABM10yrs2hrs          1:15   1.26 
+ABM10yrs2hrs          1:18   1.05 
+ABM10yrs2hrs          1:21   0.908
+ABM10yrs2hrs          1:24   0.799
+ABM10yrs2hrs          1:27   0.708
+ABM10yrs2hrs          1:30   0.636
+ABM10yrs2hrs          1:33   0.581
+ABM10yrs2hrs          1:36   0.527
+ABM10yrs2hrs          1:39   0.49 
+ABM10yrs2hrs          1:42   0.454
+ABM10yrs2hrs          1:45   0.427
+ABM10yrs2hrs          1:48   0.4  
+ABM10yrs2hrs          1:51   0.372
+ABM10yrs2hrs          1:54   0.354
+ABM10yrs2hrs          1:57   0.336
+ABM10yrs2hrs          2:00   0.318
+
+[REPORT]
+;;Reporting Options
+SUBCATCHMENTS ALL
+NODES ALL
+LINKS ALL
+
+[TAGS]
+
+[MAP]
+DIMENSIONS 2137.576 -64.333 9643.335 5644.918
+Units      None
+
+[COORDINATES]
+;;Node           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+J2               5415.068           1893.131          
+J5               6566.084           1307.978          
+J6               6360.316           1809.538          
+J8               5138.567           3802.918          
+J9               4418.378           2889.821          
+J10              4424.808           3153.462          
+J4               6823.294           1140.791          
+J1               4778.472           1417.292          
+J3               5595.115           2336.819          
+J7               5325.044           3102.020          
+J11              4752.751           3571.429          
+J12              5312.184           5063.248          
+
+[VERTICES]
+;;Link           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+T4-2             4739.891           3397.812          
+T4-3             5035.683           3571.429          
+T4-3             5042.113           3706.464          
+T3-2             5337.905           3732.185          
+
+[Polygons]
+;;Subcatchment   X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+A2               9137.862           940.587           
+A2               9302.164           1556.721          
+A2               8390.285           2526.106          
+A2               7379.825           2567.182          
+A2               7429.116           1400.634          
+A1               4086.563           458.062           
+A1               4160.500           975.615           
+A1               4669.837           950.970           
+A1               5548.856           1452.093          
+A1               5581.716           310.190           
+A1               4867.000           195.178           
+A3               6297.935           2800.132          
+A3               6946.737           3271.194          
+A3               7907.907           3139.752          
+A3               7940.767           3410.852          
+A3               7293.018           3745.043          
+A3               6971.382           4602.045          
+A3               6585.271           4429.527          
+A3               6420.969           3714.811          
+A3               5955.091           2959.011          
+A4               3550.123           3206.322          
+A4               3342.244           2942.475          
+A4               2918.491           3086.392          
+A4               2478.747           3030.424          
+A4               3070.403           4013.851          
+A4               3686.044           3917.907          
+A5               4226.039           1863.728          
+A5               3682.356           1607.877          
+A5               3442.496           1815.756          
+A5               3554.430           1975.662          
+A5               3466.482           2207.527          
+A5               3826.272           2647.271          
+A5               4337.974           2719.229          
+A5               4689.769           2567.318          
+E1               4365.046           4144.795          
+E1               4518.867           4808.151          
+E1               4586.164           5202.318          
+E1               4481.613           5204.819          
+E1               3818.829           4472.268          
+E1               3722.900           4062.388          
+
+[SYMBOLS]
+;;Gage           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+Gage1            2670.022           5385.406          
+

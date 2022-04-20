@@ -1,0 +1,514 @@
+; Downloaded from OpenSWMM topic https://www.openswmm.org/Thread/23670/green-and-grey-infrastructure-design on 20-Apr-2022 10:41
+;File: "LID_100yr24hr.inp"
+
+[TITLE]
+Illustration of a bioretention cell design in SWMM5.
+
+[OPTIONS]
+;;Options            Value
+FLOW_UNITS           CFS
+INFILTRATION         MODIFIED_GREEN_AMPT
+FLOW_ROUTING         DYNWAVE
+LINK_OFFSETS         DEPTH
+MIN_SLOPE            0
+ALLOW_PONDING        NO
+SKIP_STEADY_STATE    NO
+START_DATE           01/01/2019
+START_TIME           00:00:00
+REPORT_START_DATE    01/01/2019
+REPORT_START_TIME    00:00:00
+END_DATE             01/02/2019
+END_TIME             12:00:00
+SWEEP_START          01/01
+SWEEP_END            12/31
+DRY_DAYS             0
+REPORT_STEP          00:01:00
+WET_STEP             00:01:00
+DRY_STEP             01:00:00
+ROUTING_STEP         2
+RULE_STEP            00:00:00
+INERTIAL_DAMPING     NONE
+NORMAL_FLOW_LIMITED  BOTH
+FORCE_MAIN_EQUATION  H-W
+VARIABLE_STEP        0
+LENGTHENING_STEP     0
+MIN_SURFAREA         12.6
+MAX_TRIALS           8
+HEAD_TOLERANCE       0.0015
+SYS_FLOW_TOL         5
+LAT_FLOW_TOL         5
+MINIMUM_STEP         0.5
+THREADS              7
+
+[EVAPORATION]
+;;Type          Parameters
+CONSTANT     0.0
+DRY_ONLY     NO
+
+[RAINGAGES]
+;;                           Rain      Time   Snow   Data      
+;;Name                       Type      Intrvl Catch  Source    
+100yr24hr_SCSType2-FL_11.4in INTENSITY 0:30   1.0    TIMESERIES 100yr24hr_SCSType2-FL_11.4in
+10yr24hr_SCSType2-FL_6.24in  INTENSITY 0:30   1.0    TIMESERIES 10yr24hr_SCSType2-FL_6.24in
+1yr24hr_SCSType2-FL_3.91in   INTENSITY 0:30   1.0    TIMESERIES 1yr24hr_SCSType2-FL_3.91in
+25yr24hr_SCSType2-FL_7.95in  INTENSITY 0:30   1.0    TIMESERIES 25yr24hr_SCSType2-FL_7.95in
+2yr24hr_SCSType2-FL_4.32in   INTENSITY 0:30   1.0    TIMESERIES 2yr24hr_SCSType2-FL_4.32in
+50yr24hr_SCSType2-FL_9.54in  INTENSITY 0:30   1.0    TIMESERIES 50yr24hr_SCSType2-FL_9.54in
+5yr24hr_SCSType2-FL_5.24in   INTENSITY 0:30   1.0    TIMESERIES 5yr24hr_SCSType2-FL_5.24in
+OneInchRain                  INTENSITY 1:00   1.0    TIMESERIES OneInchRain     
+
+[SUBCATCHMENTS]
+;;             Raingage                       Outlet          Area  PercImperv Width     PercSlope CurbLength SnowPack
+SitePlan_LID   100yr24hr_SCSType2-FL_11.4in   STMMH_BCD2400   1.8   56.4       142.693   0.5       0                
+
+[SUBAREAS]
+;;Subcatchment   N-Imperv   N-Perv     S-Imperv   S-Perv     PctZero    RouteTo    PctRouted 
+SitePlan_LID     0.019      0.107      1.753      0.107      18.55      PERVIOUS   42.997    
+
+[INFILTRATION]
+;;Subcatchment   Suction    HydCon     IMDmax    
+SitePlan_LID     6.7        0.26       0.37      
+
+[LID_CONTROLS]
+;;               Type/Layer Parameters
+BRC              BC
+BRC              SURFACE    12         0.1        0.15       0          3         
+BRC              SOIL       12         0.45       0.2        0.1        5          35         2.5       
+BRC              STORAGE    24         0.4        0.5        0         
+BRC              DRAIN      0          0.5        24         6          0          0                    
+
+[LID_USAGE]
+;;Subcatchment   LID Process      Number  Area       Width      InitSatur  FromImprv  ToPerv     Report File                 Drain to          FromPerv
+SitePlan_LID     BRC              1       4323       34         15         100        0          *                           *                100
+
+[JUNCTIONS]
+;;              InvertElev MaxDepth InitDepth SurchargeDepth PondedArea
+STMMH_BCD2400   -2         10.4     3         0              0       
+
+[OUTFALLS]
+;;               Invert     Outfall      Stage/Table      Tide
+;;Name           Elev.      Type         Time Series      Gate Route To        
+OF1              -2.5       FIXED        1                NO                   
+
+[CONDUITS]
+;;     InletNode       OutletNode Length  Roughness InOffset OutOffset InitFlow MaxFlow
+Pipe   STMMH_BCD2400   OF1        114.0   0.014     0        0         0        0    
+
+[XSECTIONS]
+;;     Shape      Geom1  Geom2 Geom3 Geom4 Barrels Culvert
+Pipe   CIRCULAR   1.41   0     0     0     1            
+
+[LOSSES]
+;;Link           Inlet      Outlet     Average    Flap Gate  SeepageRate
+Pipe             0.3        1          0          NO         0
+
+[TIMESERIES]
+;;                             Date         Time       Value   
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   00:00:00   0.132 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   00:30:00   0.132 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   01:00:00   0.132 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   01:30:00   0.155 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   02:00:00   0.155 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   02:30:00   0.155 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   03:00:00   0.155 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   03:30:00   0.177 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   04:00:00   0.177 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   04:30:00   0.199 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   05:00:00   0.199 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   05:30:00   0.199 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   06:00:00   0.221 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   06:30:00   0.243 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   07:00:00   0.265 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   07:30:00   0.287 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   08:00:00   0.309 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   08:30:00   0.331 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   09:00:00   0.375 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   09:30:00   0.442 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   10:00:00   0.552 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   10:30:00   0.707 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   11:00:00   1.08  
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   11:30:00   6.6   
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   12:00:00   2.47  
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   12:30:00   0.861 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   13:00:00   0.618 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   13:30:00   0.486 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   14:00:00   0.42  
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   14:30:00   0.353 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   15:00:00   0.331 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   15:30:00   0.287 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   16:00:00   0.265 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   16:30:00   0.243 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   17:00:00   0.221 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   17:30:00   0.221 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   18:00:00   0.199 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   18:30:00   0.199 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   19:00:00   0.177 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   19:30:00   0.177 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   20:00:00   0.177 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   20:30:00   0.155 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   21:00:00   0.155 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   21:30:00   0.155 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   22:00:00   0.155 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   22:30:00   0.132 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   23:00:00   0.132 
+100yr24hr_SCSType2-FL_11.4in   01/01/2019   23:30:00   0.11  
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   00:00:00   0.0725
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   00:30:00   0.0725
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   01:00:00   0.0725
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   01:30:00   0.0846
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   02:00:00   0.0846
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   02:30:00   0.0846
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   03:00:00   0.0846
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   03:30:00   0.0967
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   04:00:00   0.0967
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   04:30:00   0.109 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   05:00:00   0.109 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   05:30:00   0.109 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   06:00:00   0.121 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   06:30:00   0.133 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   07:00:00   0.145 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   07:30:00   0.157 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   08:00:00   0.169 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   08:30:00   0.181 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   09:00:00   0.205 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   09:30:00   0.242 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   10:00:00   0.302 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   10:30:00   0.387 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   11:00:00   0.592 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   11:30:00   3.61  
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   12:00:00   1.35  
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   12:30:00   0.471 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   13:00:00   0.338 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   13:30:00   0.266 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   14:00:00   0.23  
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   14:30:00   0.193 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   15:00:00   0.181 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   15:30:00   0.157 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   16:00:00   0.145 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   16:30:00   0.133 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   17:00:00   0.121 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   17:30:00   0.121 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   18:00:00   0.109 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   18:30:00   0.109 
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   19:00:00   0.0967
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   19:30:00   0.0967
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   20:00:00   0.0967
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   20:30:00   0.0846
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   21:00:00   0.0846
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   21:30:00   0.0846
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   22:00:00   0.0846
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   22:30:00   0.0725
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   23:00:00   0.0725
+10yr24hr_SCSType2-FL_6.24in    01/01/2019   23:30:00   0.0604
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   00:00:00   0.0454
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   00:30:00   0.0454
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   01:00:00   0.0454
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   01:30:00   0.053 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   02:00:00   0.053 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   02:30:00   0.053 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   03:00:00   0.053 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   03:30:00   0.0606
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   04:00:00   0.0606
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   04:30:00   0.0682
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   05:00:00   0.0682
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   05:30:00   0.0682
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   06:00:00   0.0757
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   06:30:00   0.0833
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   07:00:00   0.0909
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   07:30:00   0.0985
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   08:00:00   0.106 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   08:30:00   0.114 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   09:00:00   0.129 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   09:30:00   0.151 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   10:00:00   0.189 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   10:30:00   0.242 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   11:00:00   0.371 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   11:30:00   2.26  
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   12:00:00   0.848 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   12:30:00   0.295 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   13:00:00   0.212 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   13:30:00   0.167 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   14:00:00   0.144 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   14:30:00   0.121 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   15:00:00   0.114 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   15:30:00   0.0985
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   16:00:00   0.0909
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   16:30:00   0.0833
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   17:00:00   0.0757
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   17:30:00   0.0757
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   18:00:00   0.0682
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   18:30:00   0.0682
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   19:00:00   0.0606
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   19:30:00   0.0606
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   20:00:00   0.0606
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   20:30:00   0.053 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   21:00:00   0.053 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   21:30:00   0.053 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   22:00:00   0.053 
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   22:30:00   0.0454
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   23:00:00   0.0454
+1yr24hr_SCSType2-FL_3.91in     01/01/2019   23:30:00   0.0379
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   00:00:00   0.0924
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   00:30:00   0.0924
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   01:00:00   0.0924
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   01:30:00   0.108 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   02:00:00   0.108 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   02:30:00   0.108 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   03:00:00   0.108 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   03:30:00   0.123 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   04:00:00   0.123 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   04:30:00   0.139 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   05:00:00   0.139 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   05:30:00   0.139 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   06:00:00   0.154 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   06:30:00   0.169 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   07:00:00   0.185 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   07:30:00   0.2   
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   08:00:00   0.216 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   08:30:00   0.231 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   09:00:00   0.262 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   09:30:00   0.308 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   10:00:00   0.385 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   10:30:00   0.493 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   11:00:00   0.755 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   11:30:00   4.6   
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   12:00:00   1.72  
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   12:30:00   0.601 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   13:00:00   0.431 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   13:30:00   0.339 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   14:00:00   0.293 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   14:30:00   0.246 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   15:00:00   0.231 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   15:30:00   0.2   
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   16:00:00   0.185 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   16:30:00   0.169 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   17:00:00   0.154 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   17:30:00   0.154 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   18:00:00   0.139 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   18:30:00   0.139 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   19:00:00   0.123 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   19:30:00   0.123 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   20:00:00   0.123 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   20:30:00   0.108 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   21:00:00   0.108 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   21:30:00   0.108 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   22:00:00   0.108 
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   22:30:00   0.0924
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   23:00:00   0.0924
+25yr24hr_SCSType2-FL_7.95in    01/01/2019   23:30:00   0.077 
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   00:00:00   0.0502
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   00:30:00   0.0502
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   01:00:00   0.0502
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   01:30:00   0.0586
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   02:00:00   0.0586
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   02:30:00   0.0586
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   03:00:00   0.0586
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   03:30:00   0.0669
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   04:00:00   0.0669
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   04:30:00   0.0753
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   05:00:00   0.0753
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   05:30:00   0.0753
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   06:00:00   0.0837
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   06:30:00   0.092 
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   07:00:00   0.1   
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   07:30:00   0.109 
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   08:00:00   0.117 
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   08:30:00   0.126 
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   09:00:00   0.142 
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   09:30:00   0.167 
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   10:00:00   0.209 
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   10:30:00   0.268 
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   11:00:00   0.41  
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   11:30:00   2.5   
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   12:00:00   0.937 
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   12:30:00   0.326 
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   13:00:00   0.234 
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   13:30:00   0.184 
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   14:00:00   0.159 
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   14:30:00   0.134 
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   15:00:00   0.126 
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   15:30:00   0.109 
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   16:00:00   0.1   
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   16:30:00   0.092 
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   17:00:00   0.0837
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   17:30:00   0.0837
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   18:00:00   0.0753
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   18:30:00   0.0753
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   19:00:00   0.0669
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   19:30:00   0.0669
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   20:00:00   0.0669
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   20:30:00   0.0586
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   21:00:00   0.0586
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   21:30:00   0.0586
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   22:00:00   0.0586
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   22:30:00   0.0502
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   23:00:00   0.0502
+2yr24hr_SCSType2-FL_4.32in     01/01/2019   23:30:00   0.0418
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   00:00:00   0.111 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   00:30:00   0.111 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   01:00:00   0.111 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   01:30:00   0.129 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   02:00:00   0.129 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   02:30:00   0.129 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   03:00:00   0.129 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   03:30:00   0.148 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   04:00:00   0.148 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   04:30:00   0.166 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   05:00:00   0.166 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   05:30:00   0.166 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   06:00:00   0.185 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   06:30:00   0.203 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   07:00:00   0.222 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   07:30:00   0.24  
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   08:00:00   0.259 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   08:30:00   0.277 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   09:00:00   0.314 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   09:30:00   0.37  
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   10:00:00   0.462 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   10:30:00   0.591 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   11:00:00   0.905 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   11:30:00   5.53  
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   12:00:00   2.07  
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   12:30:00   0.721 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   13:00:00   0.517 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   13:30:00   0.407 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   14:00:00   0.351 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   14:30:00   0.296 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   15:00:00   0.277 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   15:30:00   0.24  
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   16:00:00   0.222 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   16:30:00   0.203 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   17:00:00   0.185 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   17:30:00   0.185 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   18:00:00   0.166 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   18:30:00   0.166 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   19:00:00   0.148 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   19:30:00   0.148 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   20:00:00   0.148 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   20:30:00   0.129 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   21:00:00   0.129 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   21:30:00   0.129 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   22:00:00   0.129 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   22:30:00   0.111 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   23:00:00   0.111 
+50yr24hr_SCSType2-FL_9.54in    01/01/2019   23:30:00   0.0924
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   00:00:00   0.0609
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   00:30:00   0.0609
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   01:00:00   0.0609
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   01:30:00   0.0711
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   02:00:00   0.0711
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   02:30:00   0.0711
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   03:00:00   0.0711
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   03:30:00   0.0812
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   04:00:00   0.0812
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   04:30:00   0.0914
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   05:00:00   0.0914
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   05:30:00   0.0914
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   06:00:00   0.102 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   06:30:00   0.112 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   07:00:00   0.122 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   07:30:00   0.132 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   08:00:00   0.142 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   08:30:00   0.152 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   09:00:00   0.173 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   09:30:00   0.203 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   10:00:00   0.254 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   10:30:00   0.325 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   11:00:00   0.497 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   11:30:00   3.03  
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   12:00:00   1.14  
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   12:30:00   0.396 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   13:00:00   0.284 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   13:30:00   0.223 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   14:00:00   0.193 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   14:30:00   0.162 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   15:00:00   0.152 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   15:30:00   0.132 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   16:00:00   0.122 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   16:30:00   0.112 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   17:00:00   0.102 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   17:30:00   0.102 
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   18:00:00   0.0914
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   18:30:00   0.0914
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   19:00:00   0.0812
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   19:30:00   0.0812
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   20:00:00   0.0812
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   20:30:00   0.0711
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   21:00:00   0.0711
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   21:30:00   0.0711
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   22:00:00   0.0711
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   22:30:00   0.0609
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   23:00:00   0.0609
+5yr24hr_SCSType2-FL_5.24in     01/01/2019   23:30:00   0.0508
+OneInchRain                                 0:00       0.969 
+OneInchRain                                 1:00       0.0   
+
+[REPORT]
+INPUT      YES
+CONTROLS   YES
+SUBCATCHMENTS ALL
+NODES ALL
+LINKS ALL
+
+[MAP]
+DIMENSIONS       482268.8405      1312253.19585    482676.5775      1312609.97315   
+UNITS            Feet
+
+[COORDINATES]
+;;Node           X-Coord          Y-Coord         
+STMMH_BCD2400    482358.527       1312319.196     
+OF1              482289.454       1312269.413     
+
+[POLYGONS]
+;;Subcatchment   X-Coord          Y-Coord         
+SitePlan_LID     482657.439       1312457.763     
+SitePlan_LID     482658.044       1312407.978     
+SitePlan_LID     482652.358       1312405.18      
+SitePlan_LID     482650.012       1312401.932     
+SitePlan_LID     482645.409       1312399.224     
+SitePlan_LID     482639.724       1312399.224     
+SitePlan_LID     482635.031       1312400.578     
+SitePlan_LID     482628.533       1312402.563     
+SitePlan_LID     482620.862       1312404.729     
+SitePlan_LID     482610.454       1312404.328     
+SitePlan_LID     482413.448       1312330.116     
+SitePlan_LID     482405.59        1312331.951     
+SitePlan_LID     482399.675       1312332.15      
+SitePlan_LID     482393.842       1312332.168     
+SitePlan_LID     482389.709       1312331.519     
+SitePlan_LID     482387.044       1312329.54      
+SitePlan_LID     482383.52        1312325.46      
+SitePlan_LID     482380.181       1312321.565     
+SitePlan_LID     482375.528       1312317.874     
+SitePlan_LID     482370.161       1312315.746     
+SitePlan_LID     482363.304       1312316.928     
+SitePlan_LID     482357.184       1312318.968     
+SitePlan_LID     482351.62        1312322.121     
+SitePlan_LID     482347.169       1312325.645     
+SitePlan_LID     482342.532       1312331.024     
+SitePlan_LID     482287.374       1312479.428     
+SitePlan_LID     482295.491       1312481.017     
+SitePlan_LID     482303.036       1312482.935     
+SitePlan_LID     482307.897       1312484.578     
+SitePlan_LID     482311.161       1312487.413     
+SitePlan_LID     482313.71        1312492.186     
+SitePlan_LID     482314.712       1312496.274     
+SitePlan_LID     482314.897       1312500.54      
+SitePlan_LID     482423.343       1312540.896     
+SitePlan_LID     482431.214       1312541.186     
+SitePlan_LID     482446.511       1312538.005     
+SitePlan_LID     482458.485       1312539.543     
+SitePlan_LID     482469.911       1312543.278     
+SitePlan_LID     482478.589       1312548.331     
+SitePlan_LID     482485.511       1312553.165     
+SitePlan_LID     482490.243       1312559.706     
+SitePlan_LID     482493.091       1312566.348     
+SitePlan_LID     482555.465       1312588.113     
+SitePlan_LID     482589.375       1312588.159     
+SitePlan_LID     482592.858       1312588.502     
+SitePlan_LID     482594.914       1312589.587     
+SitePlan_LID     482596.57        1312591.586     
+SitePlan_LID     482598.854       1312593.527     
+SitePlan_LID     482603.594       1312593.756     
+SitePlan_LID     482610.606       1312593.637     
+SitePlan_LID     482657.439       1312457.763     

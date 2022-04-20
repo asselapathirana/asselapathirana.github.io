@@ -1,0 +1,147 @@
+[TITLE]
+;;Project Title/Notes
+
+[OPTIONS]
+;;Option             Value
+FLOW_UNITS           CMS
+INFILTRATION         HORTON
+FLOW_ROUTING         DYNWAVE
+LINK_OFFSETS         DEPTH
+MIN_SLOPE            0
+ALLOW_PONDING        NO
+SKIP_STEADY_STATE    NO
+
+START_DATE           01/29/2013
+START_TIME           00:00:00
+REPORT_START_DATE    01/29/2013
+REPORT_START_TIME    00:00:00
+END_DATE             01/29/2013
+END_TIME             03:00:00
+SWEEP_START          01/01
+SWEEP_END            12/31
+DRY_DAYS             0
+REPORT_STEP          00:05:00
+WET_STEP             00:15:00
+DRY_STEP             01:00:00
+ROUTING_STEP         0:00:30 
+RULE_STEP            00:00:00
+
+INERTIAL_DAMPING     PARTIAL
+NORMAL_FLOW_LIMITED  BOTH
+FORCE_MAIN_EQUATION  H-W
+VARIABLE_STEP        0.75
+LENGTHENING_STEP     0
+MIN_SURFAREA         0
+MAX_TRIALS           0
+HEAD_TOLERANCE       0
+SYS_FLOW_TOL         5
+LAT_FLOW_TOL         5
+MINIMUM_STEP         0.5
+THREADS              1
+
+[EVAPORATION]
+;;Data Source    Parameters
+;;-------------- ----------------
+CONSTANT         0.0
+DRY_ONLY         NO
+
+[RAINGAGES]
+;;Name           Format    Interval SCF      Source    
+;;-------------- --------- ------ ------ ----------
+RG1              VOLUME    0:10     1.0      TIMESERIES rainfall        
+
+[SUBCATCHMENTS]
+;;   Raingage Outlet Area    PercImperv Width  PercSlope CurbLength SnowPack
+c1   RG1      j1     235.0   27.0       1000   0.5       0                
+2    RG1      j3     470.0   27.0       1500   0.5       0                
+
+[SUBAREAS]
+;;Subcatchment   N-Imperv   N-Perv     S-Imperv   S-Perv     PctZero    RouteTo    PctRouted 
+;;-------------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
+c1               0.01       0.1        0.05       0.05       25         OUTLET    
+2                0.01       0.1        0.05       0.05       25         OUTLET    
+
+[INFILTRATION]
+;;Subcatchment   Param1     Param2     Param3     Param4     Param5    
+;;-------------- ---------- ---------- ---------- ---------- ----------
+c1               3.0        0.5        4          7          0         
+2                3.0        0.5        4          7          0         
+
+[JUNCTIONS]
+;;   InvertElev MaxDepth InitDepth SurchargeDepth PondedArea
+j3   55         2.17     0         0              0       
+j4   40         2.17     0         0              0       
+
+[OUTFALLS]
+;;Name           Elevation  Type       Stage Data       Gated    Route To        
+;;-------------- ---------- ---------- ---------------- -------- ----------------
+outlet           30         FREE                        NO                       
+
+[STORAGE]
+;;Name           Elev.    MaxDepth   InitDepth  Shape      Curve Type/Params            SurDepth  Fevap    Psi      Ksat     IMD     
+;;-------------- -------- ---------- ----------- ---------- ---------------------------- --------- --------          -------- --------
+j1               50       2          0          FUNCTIONAL 2000       0          0        0         0       
+
+[CONDUITS]
+;;   InletNode OutletNode Length   Roughness InOffset OutOffset InitFlow MaxFlow
+1    j1        j4         4610.0   0.01      0        0         0        0    
+2    j4        outlet     6910.0   0.01      0        0         0        0    
+j3   j3        j4         4610.0   0.01      0        0         0        0    
+
+[XSECTIONS]
+;;   Shape      Geom1  Geom2 Geom3 Geom4 Barrels Culvert
+1    CIRCULAR   1.37   0     0     0     2            
+2    CIRCULAR   2.28   0     0     0     2            
+j3   CIRCULAR   1.82   0     0     0     2            
+
+[TIMESERIES]
+;;         Date   Time   Value 
+rainfall          0:10   5.18
+rainfall          0:20   10.4
+rainfall          0:30   25.9
+rainfall          0:40   8.29
+rainfall          0:50   4.15
+rainfall          1:00   0.0 
+
+[REPORT]
+;;Reporting Options
+SUBCATCHMENTS ALL
+NODES ALL
+LINKS ALL
+
+[TAGS]
+
+[MAP]
+DIMENSIONS -2558.267 0.000 10000.000 10000.000
+Units      None
+
+[COORDINATES]
+;;Node           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+j3               5535.433           7590.551          
+j4               3503.937           5259.843          
+outlet           3614.173           3748.031          
+j1               937.008            7622.047          
+
+[VERTICES]
+;;Link           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+
+[Polygons]
+;;Subcatchment   X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+c1               -1637.795          8393.701          
+c1               -2125.984          6913.386          
+c1               204.724            6755.906          
+c1               236.220            8110.236          
+c1               -1669.291          8377.953          
+2                2472.441           7984.252          
+2                4047.244           6661.417          
+2                4535.433           8267.717          
+2                2440.945           7984.252          
+
+[SYMBOLS]
+;;Gage           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+RG1              6519.685           9370.079          
+
